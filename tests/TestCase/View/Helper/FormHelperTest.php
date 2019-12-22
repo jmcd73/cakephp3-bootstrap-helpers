@@ -639,11 +639,15 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'input-group'
             ]],
+            ['div' => [
+                'class' => 'input-group-prepend'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             '@',
             '/span',
+            '/div',
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
@@ -668,11 +672,15 @@ class FormHelperTest extends TestCase {
                 'name' => $fieldName,
                 'id' => $fieldName
             ]],
+            ['div' => [
+                'class' => 'input-group-append'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             '.00',
             '/span',
+            '/div',
             '/div',
             '/div'
         ];
@@ -685,22 +693,30 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'input-group'
             ]],
+            ['div' => [
+                'class' => 'input-group-prepend'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             '$',
             '/span',
+            '/div',
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
                 'id' => $fieldName
             ]],
+            ['div' => [
+                'class' => 'input-group-append'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             '.00',
             '/span',
+            '/div',
             '/div',
             '/div'
         ];
@@ -714,8 +730,8 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'input-group'
             ]],
-            ['span' => [
-                'class' => 'input-group-btn'
+            ['div' => [
+                'class' => 'input-group-prepend'
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
@@ -723,7 +739,7 @@ class FormHelperTest extends TestCase {
             ]],
             'Go!',
             '/button',
-            '/span',
+            '/div',
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
@@ -751,8 +767,8 @@ class FormHelperTest extends TestCase {
                 'name' => $fieldName,
                 'id' => $fieldName
             ]],
-            ['span' => [
-                'class' => 'input-group-btn'
+            ['div' => [
+                'class' => 'input-group-append'
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
@@ -760,7 +776,7 @@ class FormHelperTest extends TestCase {
             ]],
             'Go!',
             '/button',
-            '/span',
+            '/div',
             '/div',
             '/div'
         ];
@@ -780,8 +796,8 @@ class FormHelperTest extends TestCase {
                 'name' => $fieldName,
                 'id' => $fieldName
             ]],
-            ['span' => [
-                'class' => 'input-group-btn'
+            ['div' => [
+                'class' => 'input-group-append'
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
@@ -795,7 +811,7 @@ class FormHelperTest extends TestCase {
             ]],
             'GoGo!',
             '/button',
-            '/span',
+            '/div',
             '/div',
             '/div'
         ];
@@ -825,7 +841,7 @@ class FormHelperTest extends TestCase {
                 'id' => $fieldName
             ]],
             ['div' => [
-                'class' => 'input-group-btn'
+                'class' => 'input-group-append'
             ]],
             ['div' => [
                 'class' => 'btn-group',
@@ -876,7 +892,7 @@ class FormHelperTest extends TestCase {
                 'id' => $fieldName
             ]],
             ['div' => [
-                'class' => 'input-group-btn'
+                'class' => 'input-group-append'
             ]],
             ['div' => [
                 'class' => 'btn-group dropup',
@@ -1305,17 +1321,17 @@ class FormHelperTest extends TestCase {
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->request = $this->form->request->withData('Contact.picture', [
+        $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData('Contact.picture', [
             'name' => '', 'type' => '', 'tmp_name' => '',
             'error' => 4, 'size' => 0
-        ]);
+        ]));
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->request = $this->form->request->withData(
+        $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData(
             'Contact.picture',
             'no data should be set in value'
-        );
+        ));
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
     }
