@@ -52,7 +52,7 @@ class NavbarHelper extends Helper {
      *
      * @var array
      */
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'templates' => [
             'navbarStart' => '<nav class="navbar{{attrs.class}}"{{attrs}}>{{containerStart}}{{header}}{{responsiveStart}}',
             'navbarEnd' => '{{responsiveEnd}}{{containerEnd}}</nav>',
